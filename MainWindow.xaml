@@ -1,0 +1,57 @@
+﻿<Window x:Class="PhotoShooter.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PhotoShooter"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="480" Width="890" ResizeMode="NoResize">
+    <Grid>
+        <ListView x:Name="ImageListView" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="27,67,316,28">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Image" Width="200" >
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Image Source="{Binding Image}"></Image>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+
+
+                    </GridViewColumn>
+                    <GridViewColumn Header="PathName" Width="160">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding PathName}" FontSize="20px"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="FileName" Width="180">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding FileName}" FontSize="20px"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                </GridView>
+            </ListView.View>
+            <ListView.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Header="Rename Image" Click="RenameImage"/>
+                    <MenuItem Header="Delete Image" Click="DeleteImage"/>
+                </ContextMenu>
+            </ListView.ContextMenu>
+        </ListView>
+        <TextBox x:Name="DirectoryTextbox" HorizontalAlignment="Left" Margin="151,27,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="393" Height="35" FontSize="15"/>
+        <Button x:Name="CaptureButton" Content="Capture&#xD;&#xA;" HorizontalAlignment="Left" Margin="695,367,0,0" VerticalAlignment="Top" Height="51" Width="167" FontWeight="Bold" FontSize="18" Background="#FF0FD699" Foreground="White" HorizontalContentAlignment="Center" Padding="0,12,0,5" Click="CaptureImage" RenderTransformOrigin="-0.122,1.039"/>
+        <Image x:Name="PreviewImage" HorizontalAlignment="Left" Height="295" VerticalAlignment="Top" Width="292" Margin="569,69,0,0" FlowDirection="RightToLeft"/>
+        <Button x:Name="OpenCamera" HorizontalAlignment="Left" Margin="569,367,0,0" VerticalAlignment="Top" Height="51" Width="121" FontWeight="Bold" FontSize="18" Background="#FF0FABD6" Foreground="White" HorizontalContentAlignment="Center"  Click="HandleWebcam" >
+            <TextBlock Height="47" Width="93" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Center"><Run Text="Open/Close "/><LineBreak/><Run Text="Webcam"/></TextBlock>
+        </Button>
+        <Button Content="Choose Folder" HorizontalAlignment="Left" Margin="549,26,0,0" VerticalAlignment="Top" Height="35" Width="110" FontSize="15" Background="#FF330569" Foreground="White" Click="LoadImages" />
+        <Label Content="Current Folder" HorizontalAlignment="Left" Margin="27,26,0,0" VerticalAlignment="Top" FontSize="16" FontWeight="Bold"/>
+        <Button x:Name="SyncToFirebaseButton" Content="Sync To Firebase" HorizontalAlignment="Left" Margin="664,26,0,0" VerticalAlignment="Top" Height="35" Width="114" Click="SyncToFirebase"/>
+        <WindowsFormsHost x:Name="WinFormsHost" HorizontalAlignment="Left" Height="323" Margin="27,92,0,0" VerticalAlignment="Top" Width="519"/>
+
+    </Grid>
+</Window>
